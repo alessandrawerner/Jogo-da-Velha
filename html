@@ -69,8 +69,55 @@
 
                     //define o jogador da rodada 
                     (jogadorAtual.forma == 0) ? jogadorAtual = jogador2 : jogadorAtual = jogador1; 
+                setLabelJogadorAtual();
                 } else alert ('Ops. Already marked value for this =/'); 
+                allElementsInSomeLine();
+                allElementsInColum();
+                allElementsInSomeDiagonal();
+
+                if (tabuleiroIsFilled()) {
+                    alert('Nobody wins! :(. Try Again');
+                    reset();
+                }
             }  
+            
+        /*Verifica se o tabuleiro está completamente preenchido, se estiver, significa que ninguém venceu a rodada*/
+            tabuleiroIsFilled = function(){
+                var preenchidos = 0;
+                for (var i = 0; i < tabuleiro.lenght; i++)
+                    if (tabuleiro[i] != undefined)
+                        preenchidos++;
+                return preenchidos == tabuleiro.lenght;
+            }
+            
+        /*Verifica a existência de ocorrências de um mesmo elemento(X ou O) nas linhas do tabuleiro
+        procurando um vencedor*/
+            allElementsInSomeLine = function () {
+                for (var i = 0; i < 7; i += 3) {
+                    if (tabuleiro[i] == 'X' && tabuleiro [i + 1] == 'X' && tabuleiro [i + 2] == 'X') {
+                        alert(jogador1.nome + 'wins!!!');
+                        reset();
+                    }
+                    if (tabuleiro[i] == 'O' && tabuleiro [i + 1] == 'O' && tabuleiro [i + 2] == 'O') {
+                        alert(jogador2.nome + 'wins!!!');
+                        reset();
+                }
+            }
+         }
+
+            /*Verifica a existência de ocorrências de um mesmo elemento(X ou O) nas diagonais do tabuleiro*/
+            allElementsInSomeDiagonal = function() {
+                if ((tabuleiro[0] == 'X' && tabuleiro [4] == 'X' && tabuleiro[8] == 'X') ||
+                    (tabuleiro[2] == 'X' && tabuleiro [4] == 'X' && tabuleiro[6] == 'X')) {
+                    alert(jogador1.nome + 'wins!!!');
+                reset();
+            } else if ((tabuleiro[0] == 'O' && tabuleiro [4] == 'O' && tabuleiro[8] == 'O') ||a
+                    (tabuleiro[2] == 'O' && tabuleiro [4] == 'O' && tabuleiro[6] == 'O')) {
+                    alert(jogador2.nome + 'wins!!!');
+            reset();
+            }
+        }
+       
         </script>
 
     </head>
